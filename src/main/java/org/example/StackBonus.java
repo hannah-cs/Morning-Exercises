@@ -2,20 +2,21 @@ package org.example;
 
 import java.util.Arrays;
 
-public class StackBonus{
+public class StackBonus<T>{
     int maxSize;
     int initialMaxSize;
 
-    long[] stackArray;
+    T[] stackArray;
     int top;
 
 
     public StackBonus(int s) {
         maxSize = s;
-        stackArray = new long[maxSize];
+        this.stackArray = (T[]) new Object[maxSize];
         top = -1;
         initialMaxSize = s;
     }
+
 
     public boolean isFull(){
         return top == maxSize-1;
@@ -25,7 +26,7 @@ public class StackBonus{
         return top == -1;
     }
 
-    public void push(long j) {
+    public void push(T j) {
         if (isFull()) {
             int newMaxSize = maxSize*2;
             stackArray = Arrays.copyOf(stackArray, newMaxSize);
@@ -40,14 +41,14 @@ public class StackBonus{
         if (isEmpty()) {
             throw new StackEmptyException("The stack is empty.");
         } else {
-            long poppedElement = stackArray[top];
+            T poppedElement = stackArray[top];
             for (int i = 0; i < top; i++) {
                 stackArray[i] = stackArray[i + 1];
             }
-            stackArray[top] = 0 ;
+            stackArray[top] = null ;
             top--;
             long populatedElements = Arrays.stream(stackArray)
-                    .filter(element -> element != 0)
+                    .filter(element -> element != null)
                     .count();
             if (populatedElements <= maxSize / 4 && maxSize > initialMaxSize) {
                 int newMaxSize = maxSize / 2;
@@ -65,6 +66,18 @@ public class StackBonus{
         return top+1;
     }
 
+    @Override
+    public String toString(){
+        StringBuilder str = new StringBuilder();
+        for (int i = 0; i <= top; i++) {
+            str.append(stackArray[i]);
+            if (i < top) {
+                str.append(", ");
+            }
+        }
+        return str.toString();
+    }
+
     public void peek(){
         if (isEmpty()){
             System.out.println("The stack is empty.");
@@ -73,7 +86,7 @@ public class StackBonus{
         }
     }
 
-    public class StackEmptyException extends Exception {
+    public static class StackEmptyException extends Exception {
         public StackEmptyException(String message) {
             super(message);
         }
@@ -81,12 +94,13 @@ public class StackBonus{
 
 
     public static void main(String[] args) throws StackEmptyException {
-        StackBonus newStack = new StackBonus(3);
-        newStack.push(123);
-        newStack.push(321);
-        newStack.push(456);
+        StackBonus<String> newStack = new StackBonus<>(3);
+        newStack.push("Hello");
+        newStack.push("World");
+        newStack.push("!");
+        System.out.println(newStack.toString());
         System.out.println("Max size: "+newStack.maxSize+", current size: "+newStack.size());
-        newStack.push(456);
+        newStack.push(" :)");
         System.out.println("Max size: "+newStack.maxSize+", current size: "+newStack.size());
         newStack.pop();
         newStack.pop();
