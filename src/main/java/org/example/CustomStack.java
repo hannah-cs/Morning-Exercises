@@ -1,6 +1,4 @@
 package org.example;
-
-import java.sql.Array;
 import java.util.Arrays;
 
 public class CustomStack {
@@ -23,9 +21,9 @@ public class CustomStack {
         return top == -1;
     }
 
-    public void push(long j){
+    public void push(long j) throws StackFullException {
         if (isFull()) {
-            System.out.println("The stack is full. Could not add "+j);
+            throw new StackFullException("The stack is full. Could not add "+j);
         } else {
             top ++;
             stackArray[top] = j;
@@ -33,9 +31,9 @@ public class CustomStack {
         }
     }
 
-    public void pop() {
+    public void pop() throws StackEmptyException {
         if (isEmpty()) {
-            System.out.println("The stack is empty.");
+            throw new StackEmptyException("The stack is empty.");
         } else {
             long poppedElement = stackArray[top];
             for (int i = 0; i < top; i++) {
@@ -55,7 +53,20 @@ public class CustomStack {
         }
     }
 
-    public static void main(String[] args) {
+    public class StackFullException extends Exception {
+        public StackFullException(String message) {
+            super(message);
+        }
+    }
+
+    public class StackEmptyException extends Exception {
+        public StackEmptyException(String message) {
+            super(message);
+        }
+    }
+
+
+    public static void main(String[] args) throws StackFullException, StackEmptyException {
         CustomStack newStack = new CustomStack(3);
         newStack.push(123);
         newStack.push(321);
@@ -63,6 +74,5 @@ public class CustomStack {
         newStack.push(654);
         newStack.peek();
         newStack.pop();
-
     }
 }
