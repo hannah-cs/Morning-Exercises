@@ -7,6 +7,7 @@ public class Person implements Serializable {
     private int age;
     private String address;
     private transient LocalDateTime currentDateTime;
+    private transient double salary;
 
     public Person(String name, int age, String address) {
         this.name = name;
@@ -30,12 +31,10 @@ public class Person implements Serializable {
     public LocalDateTime getCurrentDateTime() {
         return currentDateTime;
     }
-
     @Override
     public String toString() {
-        return "Person{" + "name='" + name +", age=" + age + ", address='" + address + "' current datetime=" + currentDateTime + '}';
+        return "Person{name=" + name +", age=" + age + ", address='" + address + "' current datetime=" + currentDateTime + "salary: "+salary+"}";
     }
-
     public static void serializePerson(Person person, String fileName) {
         try (FileOutputStream fileOut = new FileOutputStream(fileName);
              ObjectOutputStream objectOut = new ObjectOutputStream(fileOut)) {
@@ -45,7 +44,6 @@ public class Person implements Serializable {
             e.printStackTrace();
         }
     }
-
     public static Person deserializePerson(String fileName) {
         try (FileInputStream fileIn = new FileInputStream(fileName);
              ObjectInputStream objectIn = new ObjectInputStream(fileIn)) {
@@ -62,13 +60,11 @@ public class Person implements Serializable {
         stream.defaultWriteObject();
         stream.writeObject(encryptedName);
     }
-
     private void readObject(java.io.ObjectInputStream stream) throws IOException, ClassNotFoundException {
         stream.defaultReadObject();
         String encryptedName = (String) stream.readObject();
         name = new StringBuilder(encryptedName).reverse().toString();
     }
-
     public static void main(String[] args) {
         Person person = new Person("Hannah CS", 31, "Berlin 1");
         serializePerson(person, "person.ser");
