@@ -27,5 +27,9 @@ public class HashMapExercises {
             String capital = entry.getValue();
             System.out.println("Country: "+country+", capital city: "+capital);
         }
+
+        System.out.println(students.get(1));
+        students.remove(1);
+        System.out.println(students.get(1));
     }
 }
