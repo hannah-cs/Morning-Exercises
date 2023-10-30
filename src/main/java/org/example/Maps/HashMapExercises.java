@@ -1,4 +1,5 @@
 package org.example.Maps;
+import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.HashMap;
 
@@ -10,13 +11,21 @@ public class HashMapExercises {
         students.put(2, "Faruk");
         students.put(3, "Menil");
 
-        String student1Name = students.get(1);
-        System.out.println("Student 1: " + student1Name);
-
         for (Map.Entry<Integer, String> entry : students.entrySet()) {
             int studentID = entry.getKey();
             String studentName = entry.getValue();
             System.out.println("Student ID: " + studentID + ", student name: " + studentName);
+        }
+
+        Map<String, String> capitals = new LinkedHashMap<>();
+        capitals.put("Germany", "Berlin");
+        capitals.put("Ireland", "Dublin");
+        capitals.put("Turkey", "Ankara");
+
+        for (Map.Entry<String, String> entry : capitals.entrySet()) {
+            String country = entry.getKey();
+            String capital = entry.getValue();
+            System.out.println("Country: "+country+", capital city: "+capital);
         }
     }
 }
