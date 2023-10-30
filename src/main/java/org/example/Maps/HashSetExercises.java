@@ -13,5 +13,12 @@ public class HashSetExercises {
         for (Integer element : integerSet){
             System.out.println(element);
         }
+
+        HashSet<String> uniqueStrings = new HashSet();
+        String[] strings = new String[]{"apple", "banana", "apple", "cherry"};
+        for (String string : strings) {
+            uniqueStrings.add(string);
+        }
+        System.out.println(uniqueStrings);
     }
 }
