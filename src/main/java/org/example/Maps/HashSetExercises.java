@@ -1,10 +1,28 @@
 package org.example.Maps;
-import com.sun.source.tree.Tree;
-
 import java.util.HashSet;
 import java.util.TreeSet;
 
 public class HashSetExercises {
+
+    public static class Person implements Comparable<Person>{
+        String name;
+        int age;
+        public Person(String name, int age){
+            this.name=name;
+            this.age=age;
+        }
+
+        @Override
+        public int compareTo(Person otherPerson) {
+            return Integer.compare(this.age, otherPerson.age);
+        }
+
+        @Override
+        public String toString(){
+            return name+" - aged "+age+"";
+        }
+    }
+
     public static void main(String[] args) {
         HashSet<Integer> integerSet = new HashSet();
         integerSet.add(17);
@@ -38,5 +56,12 @@ public class HashSetExercises {
         for (int element : sortedSet){
             System.out.println(element);
         }
+
+        TreeSet<Person> personSet = new TreeSet();
+        personSet.add(new Person("Bob", 45));
+        personSet.add(new Person("Jane", 28));
+        personSet.add(new Person("Jim", 16));
+
+        System.out.println(personSet);
     }
 }
