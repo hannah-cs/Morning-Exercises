@@ -1,5 +1,6 @@
 package org.example.Enums;
 import java.util.EnumMap;
+import java.util.Random;
 
 public class Enums {
     enum DaysOfWeek {
@@ -20,6 +21,15 @@ public class Enums {
             return nextDayMap.get(this);
         }
     }
+
+    enum CardSuit {
+        HEARTS, DIAMONDS, CLUBS, SPADES;
+        public static CardSuit getRandomSuit(){
+            Random random = new Random();
+            int randomIndex = random.nextInt(CardSuit.values().length);
+            return CardSuit.values()[randomIndex];
+        }
+    }
     public static void main(String[] args) {
         Enums enums = new Enums();
         DaysOfWeek today = DaysOfWeek.TUESDAY;
@@ -27,5 +37,6 @@ public class Enums {
         System.out.println("Today: " + today);
         System.out.println("Tomorrow: " + tomorrow);
 
+        System.out.println(CardSuit.getRandomSuit());
     }
 }
