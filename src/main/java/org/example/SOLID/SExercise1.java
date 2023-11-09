@@ -1,5 +1,5 @@
 package org.example.SOLID;
-public class Exercise1 {
+public class SExercise1 {
     public static class DogSound {
         public void makeSound(int volume) {
             System.out.println("Dog barked at " + volume + " decibels.");

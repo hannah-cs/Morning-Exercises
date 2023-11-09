@@ -1,7 +1,7 @@
 package org.example.SOLID;
 import java.util.ArrayList;
 import java.util.List;
-public class Exercise2 {
+public class SExercise2 {
     public static List <Grade> allGrades = new ArrayList<>();
     public static class Grade {
         String subject;
